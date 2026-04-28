@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from logger import log_state
+from player import *
 
 def main():
 	pygame.init()
@@ -9,6 +10,8 @@ def main():
 	print(f"Screen width: {SCREEN_WIDTH}")
 	print(f"Screen height: {SCREEN_HEIGHT}")
 
+	my_ship = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, PLAYER_RADIUS)
+	
 	game_clock = pygame.time.Clock()
 	dt = 0
 	while True:
@@ -18,6 +21,7 @@ def main():
 				return
 
 		screen.fill("black")
+		my_ship.draw(screen)
 		pygame.display.flip()
 		delta_time = game_clock.tick(60)
 		dt = delta_time/1000
