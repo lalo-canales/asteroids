@@ -21,6 +21,7 @@ def main():
 				return
 
 		screen.fill("black")
+		my_ship.update(dt)
 		my_ship.draw(screen)
 		pygame.display.flip()
 		delta_time = game_clock.tick(60)
