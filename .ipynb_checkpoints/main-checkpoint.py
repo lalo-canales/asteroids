@@ -9,11 +9,14 @@ def main():
 	print("Starting Asteroids with pygame version: 2.6.1")
 	print(f"Screen width: {SCREEN_WIDTH}")
 	print(f"Screen height: {SCREEN_HEIGHT}")
-
-	my_ship = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, PLAYER_RADIUS)
 	
+	updatable = pygame.sprite.Group()
+	drawable = pygame.sprite.Group()
+	Player.containers = (updatable, drawable)
+	my_ship = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, PLAYER_RADIUS)
 	game_clock = pygame.time.Clock()
 	dt = 0
+
 	while True:
 		log_state()
 		for event in pygame.event.get():
@@ -21,8 +24,11 @@ def main():
 				return
 
 		screen.fill("black")
-		my_ship.update(dt)
-		my_ship.draw(screen)
+		#my_ship.update(dt)
+		updatable.update(dt)
+		#my_ship.draw(screen)
+		for thing in drawable:
+			thing.draw(screen)
 		pygame.display.flip()
 		delta_time = game_clock.tick(60)
 		dt = delta_time/1000
