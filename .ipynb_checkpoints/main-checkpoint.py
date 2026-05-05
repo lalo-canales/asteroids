@@ -40,9 +40,15 @@ def main():
 			if my_ship.collides_with(thing):
 				log_event("player_hit")
 				print("Game over!")
-				sys.exit()				
+				sys.exit()
 		for thing in drawable:
 			thing.draw(screen)
+		for rock in asteroids:
+			for shot in shots:
+				if shot.collides_with(rock):
+					log_event("asteroid_shot")
+					shot.kill()
+					rock.kill()
 		pygame.display.flip()
 		delta_time = game_clock.tick(60)
 		dt = delta_time/1000
